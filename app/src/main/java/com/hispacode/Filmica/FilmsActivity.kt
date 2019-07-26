@@ -9,6 +9,8 @@ class FilmsActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_films)
+
+        val film = Film(genre = "Drama", title = "Amélie")
     }
 
     fun lunchFilmDetail(v: View) {
