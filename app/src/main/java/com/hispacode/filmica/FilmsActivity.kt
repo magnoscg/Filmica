@@ -29,7 +29,7 @@ class FilmsActivity : AppCompatActivity() {
 
     fun launchFilmDetail(film: Film) {
         val intent = Intent(this, DetailActivity::class.java)
-        
+        intent.putExtra("id", film.id)
         startActivity(intent)
     }
 }

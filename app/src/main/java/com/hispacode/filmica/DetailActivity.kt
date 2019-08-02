@@ -1,9 +1,9 @@
 package com.hispacode.filmica
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Button
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
+import kotlinx.android.synthetic.main.activity_detail.*
 
 class DetailActivity : AppCompatActivity() {
 
@@ -11,9 +11,17 @@ class DetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
 
-        val button: Button = findViewById(R.id.Button_add)
+        val id = intent.getStringExtra("id")
+        val film = FilmsRepo.findFilmById(id)
 
-        button.setOnClickListener {
+        film?.let {
+            labelTitle.text = it.id
+            labelGenres.text = it.genre
+            labelDescription.text = it.overView
+            labelDate.text = it.date
+        }
+
+        buttonAdd.setOnClickListener {
             Toast.makeText(this@DetailActivity,"Added to WatchList", Toast.LENGTH_LONG).show()
 
         }

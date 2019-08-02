@@ -8,12 +8,14 @@
     tools:context=".DetailActivity">
 
     <TextView
+        android:id="@+id/labelTitle"
         style="@style/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         tools:text="Avengers: Endgame" />
 
     <TextView
+        android:id="@+id/labelDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
@@ -21,19 +23,21 @@
         tools:text="Descripción" />
 
     <TextView
+        android:id="@+id/labelGenres"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
         tools:text="Generos" />
 
     <TextView
+        android:id="@+id/labelDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        tools:text="Duración" />
+        tools:text="Fecha" />
 
     <Button
-        android:id="@+id/Button_add"
+        android:id="@+id/buttonAdd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
