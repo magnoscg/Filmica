@@ -13,8 +13,12 @@ class FilmsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_films)
 
         val list: RecyclerView = findViewById(R.id.list)
+        val adapter = FilmsAdapter()
         list.layoutManager = LinearLayoutManager(this)
-        
+        list.adapter = adapter
+        adapter.setFilms(FilmsRepo.films)
+
+
     }
 
     fun lunchFilmDetail(v: View) {
