@@ -1,4 +1,4 @@
-package com.hispacode.Filmica
+package com.hispacode.filmica
 
 object FilmsRepo {
 

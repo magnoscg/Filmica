@@ -1,4 +1,4 @@
-package com.hispacode.Filmica
+package com.hispacode.filmica
 
 data class Film (
     val title: String = "No title",

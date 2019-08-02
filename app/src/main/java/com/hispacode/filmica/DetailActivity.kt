@@ -1,4 +1,4 @@
-package com.hispacode.Filmica
+package com.hispacode.filmica
 
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle

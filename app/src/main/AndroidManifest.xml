@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.hispacode.Filmica">
+    package="com.hispacode.filmica">
 
     <application
             android:allowBackup="true"
@@ -10,10 +10,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name=".DetailActivity">
+        <activity android:name="com.hispacode.filmica.DetailActivity">
         </activity>
 
-        <activity android:name=".FilmsActivity">
+        <activity android:name="com.hispacode.filmica.FilmsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
