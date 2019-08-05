@@ -14,10 +14,10 @@ import java.lang.IllegalArgumentException
 
 class FilmsFragment: Fragment() {
 
-    lateinit var listener: OnFilmClickListener
+    private lateinit var listener: OnFilmClickListener
 
     private val list: RecyclerView by lazy {
-        listFilms.layoutManager = LinearLayoutManager(context)
+        listFilms.addItemDecoration(GridOffsetDecoration())
         return@lazy listFilms
     }
     private val adapter = FilmsAdapter {
