@@ -8,16 +8,17 @@ class DetailActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)
+        if(savedInstanceState == null) {
+            val id = intent.getStringExtra("id")
+            val fragment = DetailFragment()
+            val args = Bundle()
+            args.putString("id",id)
 
-        val id = intent.getStringExtra("id")
-        val fragment = DetailFragment()
-        val args = Bundle()
-        args.putString("id",id)
+            fragment.arguments = args
 
-        fragment.arguments = args
-
-        supportFragmentManager.beginTransaction()
-                .add(R.id.container,fragment)
-                .commit()
+            supportFragmentManager.beginTransaction()
+                    .add(R.id.container,fragment)
+                    .commit()
+        }
     }
 }

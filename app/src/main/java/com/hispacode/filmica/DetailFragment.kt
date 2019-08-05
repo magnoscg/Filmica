@@ -10,6 +10,17 @@ import kotlinx.android.synthetic.main.fragment_detail.*
 
 class DetailFragment: Fragment() {
 
+    companion object {
+        fun newInstance(filmId: String): DetailFragment {
+            val fragment = DetailFragment()
+            val bundle = Bundle()
+            bundle.putString("id",filmId)
+            fragment.arguments = bundle
+
+            return fragment
+        }
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_detail,container,false)
     }
