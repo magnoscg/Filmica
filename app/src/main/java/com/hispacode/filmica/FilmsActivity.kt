@@ -20,11 +20,12 @@ class FilmsActivity : AppCompatActivity(), FilmsFragment.OnFilmClickListener {
     }
     //Is Tablet??
     override fun onClick(film: Film) {
-
         if (!isDetailViewAvailable()) {
+
             val intent = Intent(this, DetailActivity::class.java)
-            intent.putExtra("id",film.id)
+            intent.putExtra("id", film.id)
             startActivity(intent)
+
         } else {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.container_detail, DetailFragment.newInstance(film.id))
