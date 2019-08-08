@@ -73,12 +73,11 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
-        android:layout_marginBottom="8dp"
-        android:clickable="true"
         app:layout_constraintBottom_toTopOf="@+id/guideline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:srcCompat="@android:drawable/ic_menu_add" />
+        app:maxImageSize="32dp"
+        app:srcCompat="@drawable/ic_movieroll" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -99,7 +98,10 @@
             style="@style/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Genre" />
+            android:drawableLeft="@drawable/ic_genre"
+            android:drawableStart="@drawable/ic_genre"
+            android:drawablePadding="8dp"
+            android:text="@string/label_genre" />
 
         <TextView
             android:id="@+id/labelGenres"
@@ -114,7 +116,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Release Date" />
+            android:drawableLeft="@drawable/ic_release"
+            android:drawableStart="@drawable/ic_release"
+            android:text="@string/label_release_date" />
 
         <TextView
             android:id="@+id/labelDate"
@@ -128,7 +132,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="OverView" />
+            android:drawableLeft="@drawable/ic_overview"
+            android:drawableStart="@drawable/ic_overview"
+            android:text="@string/label_overview" />
 
         <TextView
             android:id="@+id/labelDescription"

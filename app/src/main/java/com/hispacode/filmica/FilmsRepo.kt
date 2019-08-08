@@ -1,5 +1,9 @@
 package com.hispacode.filmica
 
+import android.net.Uri
+import com.android.volley.Request
+import com.android.volley.toolbox.JsonObjectRequest
+
 object FilmsRepo {
 
     val films: MutableList<Film> = mutableListOf()

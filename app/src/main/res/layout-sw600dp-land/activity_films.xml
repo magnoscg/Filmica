@@ -8,15 +8,13 @@
         android:id="@+id/container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.55"
-        android:background="#2196F3">
+        android:layout_weight="0.55">
     </FrameLayout>
 
     <FrameLayout
             android:id="@+id/container_detail"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="0.45"
-        android:background="#E93D66">
+        android:layout_weight="0.45">
     </FrameLayout>
 </LinearLayout>
