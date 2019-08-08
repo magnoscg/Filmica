@@ -30,7 +30,7 @@ class FilmsAdapter(val listener: (Film) -> Unit) :
         holder.film = film
     }
     //Update RecyclerView Adapter Films
-    fun setFilms(list: MutableList<Film>) {
+    fun setFilms(list: List<Film>) {
     this.films.clear()
         this.films.addAll(list)
         notifyDataSetChanged()
