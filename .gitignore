@@ -1,4 +1,4 @@
-
+gradle.propertie
 # Created by https://www.gitignore.io/api/macos,gradle,kotlin,androidstudio
 # Edit at https://www.gitignore.io/?templates=macos,gradle,kotlin,androidstudio
 
@@ -58,10 +58,10 @@ Temporary Items
 ### Gradle ###
 .gradle
 build/
+gradle.properties
 
 # Ignore Gradle GUI config
 gradle-app.setting
-gradle.properties
 # Avoid ignoring Gradle wrapper jar file (.jar files are usually ignored)
 !gradle-wrapper.jar
 
