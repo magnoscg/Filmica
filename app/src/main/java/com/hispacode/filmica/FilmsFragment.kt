@@ -11,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.hispacode.filmica.FilmsRepo.discoverFilms
 import kotlinx.android.synthetic.main.fragments_films.*
+import kotlinx.android.synthetic.main.layout_error.*
 import java.lang.IllegalArgumentException
 
 class FilmsFragment: Fragment() {
@@ -53,25 +54,49 @@ class FilmsFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter.setFilms(FilmsRepo.films)
         list.adapter = adapter
+        buttonRetry.setOnClickListener {
+            reload()
+        }
     }
 
     override fun onResume() {
         super.onResume()
+        reload()
+    }
+
+    private fun reload() {
+        showProgress()
+
         discoverFilms(context!!,
-            {films ->
+            { films ->
                 adapter.setFilms(films)
-                filmsProgress.visibility = View.INVISIBLE
-                layoutError.visibility = View.INVISIBLE
-                list.visibility = View.VISIBLE
+                showList()
             },
-            {error ->
-                filmsProgress.visibility = View.INVISIBLE
-                list.visibility = View.INVISIBLE
-                layoutError.visibility = View.VISIBLE
+            { error ->
+                showError()
             })
     }
+
+    private fun showList() {
+        filmsProgress.visibility = View.INVISIBLE
+        layoutError.visibility = View.INVISIBLE
+        list.visibility = View.VISIBLE
+    }
+
+    private fun showError() {
+        filmsProgress.visibility = View.INVISIBLE
+        list.visibility = View.INVISIBLE
+        layoutError.visibility = View.VISIBLE
+    }
+
+    private fun showProgress() {
+        filmsProgress.visibility = View.VISIBLE
+        layoutError.visibility = View.INVISIBLE
+        list.visibility = View.INVISIBLE
+    }
+
     //Listener Interface
     interface OnFilmClickListener {
-      fun onClick(film: Film)
+        fun onClick(film: Film)
     }
 }
