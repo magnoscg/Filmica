@@ -1,41 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="wrap_content">
+
+<android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.4" />
 
-    <ImageView
-        android:id="@+id/imageFilm"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:scaleType="centerCrop"
-        android:background="@color/colorPrimary"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+        <ImageView
+            android:id="@+id/imageFilm"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/colorPrimary"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <View
-        android:id="@+id/overlay"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="#651565C0"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        <View
+            android:id="@+id/overlay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="#651565C0"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="1.0" />
 
     <TextView
         android:id="@+id/labelTitle"
@@ -46,50 +50,51 @@
         android:layout_marginBottom="8dp"
         android:textColor="@android:color/white"
         android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="@+id/overlay"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/buttonAdd"
         app:layout_constraintEnd_toEndOf="@+id/overlay"
         app:layout_constraintStart_toStartOf="@+id/overlay"
         app:layout_constraintTop_toTopOf="@+id/overlay"
         tools:text="Avengers: Endgame" />
 
-    <TextView
-        android:id="@+id/labelRating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:drawableStart="@drawable/ic_rating"
-        android:drawableLeft="@drawable/ic_rating"
-        android:drawablePadding="8dp"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/labelTitle"
-        app:layout_constraintStart_toStartOf="@+id/labelTitle"
-        app:layout_constraintTop_toBottomOf="@+id/labelTitle"
-        tools:text="0.0" />
+        <TextView
+            android:id="@+id/labelRating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:drawableStart="@drawable/ic_rating"
+            android:drawableLeft="@drawable/ic_rating"
+            android:drawablePadding="8dp"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="@+id/labelTitle"
+            app:layout_constraintStart_toStartOf="@+id/labelTitle"
+            app:layout_constraintTop_toBottomOf="@+id/labelTitle"
+            tools:text="0.0" />
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/buttonAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="32dp"
-        android:layout_marginRight="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline"
-        app:maxImageSize="32dp"
-        app:srcCompat="@drawable/ic_movieroll" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/buttonAdd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="36dp"
+            android:layout_marginRight="36dp"
+            app:layout_constraintBottom_toTopOf="@+id/guideline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline"
+            app:maxImageSize="40dp"
+            app:srcCompat="@drawable/ic_movieroll" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:orientation="vertical"
         android:padding="16dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buttonAdd">
 
@@ -98,8 +103,8 @@
             style="@style/title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:drawableLeft="@drawable/ic_genre"
             android:drawableStart="@drawable/ic_genre"
+            android:drawableLeft="@drawable/ic_genre"
             android:drawablePadding="8dp"
             android:text="@string/label_genre" />
 
@@ -116,8 +121,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:drawableLeft="@drawable/ic_release"
             android:drawableStart="@drawable/ic_release"
+            android:drawableLeft="@drawable/ic_release"
             android:text="@string/label_release_date" />
 
         <TextView
@@ -132,8 +137,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:drawableLeft="@drawable/ic_overview"
             android:drawableStart="@drawable/ic_overview"
+            android:drawableLeft="@drawable/ic_overview"
             android:text="@string/label_overview" />
 
         <TextView
@@ -151,4 +156,5 @@
         deserunt mollit anim id est laborum." />
 
     </LinearLayout>
-</android.support.constraint.ConstraintLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

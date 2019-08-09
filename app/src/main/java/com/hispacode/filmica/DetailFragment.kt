@@ -32,7 +32,7 @@ class DetailFragment: Fragment() {
         val film = FilmsRepo.findFilmById(id!!)
 
         film?.let {
-            labelTitle.text = it.id
+            labelTitle.text = it.title
             labelGenres.text = it.genre
             labelDescription.text = it.overView
             labelDate.text = it.date

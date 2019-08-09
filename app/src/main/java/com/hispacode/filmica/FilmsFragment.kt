@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.hispacode.filmica.FilmsRepo.discoverFilms
 import kotlinx.android.synthetic.main.fragments_films.*
 import java.lang.IllegalArgumentException
 
@@ -56,13 +57,17 @@ class FilmsFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
-        FilmsRepo.discoverFilms(context!!,
+        discoverFilms(context!!,
             {films ->
                 adapter.setFilms(films)
+                filmsProgress.visibility = View.INVISIBLE
+                layoutError.visibility = View.INVISIBLE
+                list.visibility = View.VISIBLE
             },
             {error ->
-
-
+                filmsProgress.visibility = View.INVISIBLE
+                list.visibility = View.INVISIBLE
+                layoutError.visibility = View.VISIBLE
             })
     }
     //Listener Interface
