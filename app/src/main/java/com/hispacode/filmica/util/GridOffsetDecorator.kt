@@ -1,9 +1,10 @@
-package com.hispacode.filmica
+package com.hispacode.filmica.util
 
 import android.graphics.Rect
 import android.support.v7.widget.GridLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.View
+import com.hispacode.filmica.R
 import kotlin.math.ceil
 
 class GridOffsetDecoration: RecyclerView.ItemDecoration() {

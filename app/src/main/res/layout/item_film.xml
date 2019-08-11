@@ -3,17 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="186dp"
+    android:layout_height="333dp"
     app:cardCornerRadius="8dp"
-    tools:layout_width="212dp">
+    tools:layout_width="222dp">
 
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="186dp"
-        tools:layout_width="212dp">
+        android:layout_height="333dp"
+        tools:layout_width="222dp">
 
         <ImageView
+            android:id="@+id/imgPoster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/colorPrimary"
@@ -22,6 +23,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <RelativeLayout
+            android:id="@+id/container_data"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

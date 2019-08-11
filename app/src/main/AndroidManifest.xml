@@ -11,10 +11,10 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
 
-        <activity android:name="com.hispacode.filmica.DetailActivity">
+        <activity android:name="com.hispacode.filmica.view.detail.DetailActivity">
         </activity>
 
-        <activity android:name="com.hispacode.filmica.FilmsActivity">
+        <activity android:name="com.hispacode.filmica.view.films.FilmsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

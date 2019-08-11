@@ -1,4 +1,4 @@
-package com.hispacode.filmica
+package com.hispacode.filmica.data
 
 import android.content.Context
 import com.android.volley.Request
@@ -25,8 +25,10 @@ object FilmsRepo {
 
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
-                val films = Film.parseFilms(response.getJSONArray("results"))
-                this.films.addAll(films)
+                val films =
+                    Film.parseFilms(response.getJSONArray("results"))
+                FilmsRepo.films.clear()
+                FilmsRepo.films.addAll(films)
 
                 onResponse.invoke(films)
             },
@@ -43,12 +45,12 @@ object FilmsRepo {
 
         return (1..10).map { i: Int ->
             return@map Film(
-                    id = "id $i",
-                    title = "Film $i",
-                    overView = "OverView $i",
-                    genre = "Genre $i",
-                    rating = i.toFloat(),
-                    date = "2019-05-$i"
+                id = "id $i",
+                title = "Film $i",
+                overView = "OverView $i",
+                genre = "Genre $i",
+                rating = i.toFloat(),
+                date = "2019-05-$i"
             )
         }.toMutableList()
     }

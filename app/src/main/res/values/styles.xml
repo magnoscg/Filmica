@@ -12,5 +12,9 @@
         <item name="android:textStyle">bold</item>
         <item name="android:drawablePadding">8dp</item>
     </style>
+    <style name="button" parent="Base.Widget.AppCompat.Button.Colored">
+        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
 
 </resources>

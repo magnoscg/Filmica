@@ -1,6 +1,7 @@
-package com.hispacode.filmica
+package com.hispacode.filmica.data
 
 import android.net.Uri
+import com.hispacode.filmica.BuildConfig
 
 object ApiRoutes {
 

@@ -1,15 +1,17 @@
-package com.hispacode.filmica
+package com.hispacode.filmica.view.films
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.Fragment
-import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.hispacode.filmica.FilmsRepo.discoverFilms
+import com.hispacode.filmica.R
+import com.hispacode.filmica.data.Film
+import com.hispacode.filmica.data.FilmsRepo
+import com.hispacode.filmica.data.FilmsRepo.discoverFilms
+import com.hispacode.filmica.util.GridOffsetDecoration
 import kotlinx.android.synthetic.main.fragments_films.*
 import kotlinx.android.synthetic.main.layout_error.*
 import java.lang.IllegalArgumentException

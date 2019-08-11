@@ -1,4 +1,4 @@
-package com.hispacode.filmica
+package com.hispacode.filmica.data
 
 object ApiConstants {
     val genres: Map<Int, String> = mapOf(

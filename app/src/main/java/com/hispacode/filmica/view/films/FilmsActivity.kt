@@ -1,11 +1,16 @@
-package com.hispacode.filmica
+package com.hispacode.filmica.view.films
 
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.widget.FrameLayout
+import com.hispacode.filmica.R
+import com.hispacode.filmica.data.Film
+import com.hispacode.filmica.view.detail.DetailActivity
+import com.hispacode.filmica.view.detail.DetailFragment
 
-class FilmsActivity : AppCompatActivity(), FilmsFragment.OnFilmClickListener {
+class FilmsActivity : AppCompatActivity(),
+    FilmsFragment.OnFilmClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,7 +33,10 @@ class FilmsActivity : AppCompatActivity(), FilmsFragment.OnFilmClickListener {
 
         } else {
             supportFragmentManager.beginTransaction()
-                .replace(R.id.container_detail, DetailFragment.newInstance(film.id))
+                .replace(
+                    R.id.container_detail,
+                    DetailFragment.newInstance(film.id)
+                )
                 .commit()
         }
     }
