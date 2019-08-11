@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.hispacode.filmica.R
 import com.hispacode.filmica.data.Film
+import com.hispacode.filmica.util.SimpleTarget
 import com.squareup.picasso.Picasso
 import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.item_film.view.*
@@ -60,35 +61,30 @@ class FilmsAdapter(val listener: (Film) -> Unit) :
         }
 
         private fun loadImage(it: Film) {
-            val target = object : Target {
-                override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-                }
+            val target = SimpleTarget { bitmap: Bitmap ->
 
-                override fun onBitmapFailed(errorDrawable: Drawable?) {
-                }
-
-                override fun onBitmapLoaded(
-                    bitmap: Bitmap,
-                    from: Picasso.LoadedFrom?
-                ) {
-                    itemView.imgPoster.setImageBitmap(bitmap)
-                    Palette.from(bitmap).generate {
-                        val defaultColor =
-                            ContextCompat.getColor(itemView.context, R.color.colorPrimary)
-                        val swatch = it?.vibrantSwatch ?: it?.dominantSwatch
-                        val color = swatch?.rgb ?: defaultColor
-
-                        itemView.container_data.setBackgroundColor(color)
-                    }
-                }
-
+                itemView.imgPoster.setImageBitmap(bitmap)
+                setColor(bitmap)
             }
             //Avoid clearing memory saving the instance of Target
             itemView.imgPoster.tag = target
 
             Picasso.with(itemView.context)
                 .load(it.getPosterUrl())
+                .error(R.drawable.placeholder)
                 .into(target)
+        }
+
+        private fun setColor(bitmap: Bitmap) {
+            Palette.from(bitmap).generate {
+                val defaultColor =
+                    ContextCompat.getColor(itemView.context, R.color.colorPrimary)
+                val swatch = it?.vibrantSwatch ?: it?.dominantSwatch
+                val color = swatch?.rgb ?: defaultColor
+
+                itemView.container.setBackgroundColor(color)
+                itemView.container_data.setBackgroundColor(color)
+            }
         }
 
         init {

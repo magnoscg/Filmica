@@ -9,16 +9,16 @@
 
 
     <FrameLayout
+        android:id="@+id/container"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="333dp"
         tools:layout_width="222dp">
 
-        <ImageView
+        <com.hispacode.filmica.util.FadeImageView
             android:id="@+id/imgPoster"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/colorPrimary"
-            android:contentDescription="Film Image"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars" />
 
