@@ -16,5 +16,10 @@
         <item name="colorButtonNormal">@color/colorAccent</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+    <style name="Navigation">
+    </style>
+    <style name="Navigation.Text">
+        <item name="android:textStyle">bold</item>
+    </style>
 
 </resources>
