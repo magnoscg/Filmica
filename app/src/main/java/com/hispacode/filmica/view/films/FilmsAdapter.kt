@@ -1,7 +1,6 @@
 package com.hispacode.filmica.view.films
 
 import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
 import android.support.v7.widget.RecyclerView
@@ -12,7 +11,6 @@ import com.hispacode.filmica.R
 import com.hispacode.filmica.data.Film
 import com.hispacode.filmica.util.SimpleTarget
 import com.squareup.picasso.Picasso
-import com.squareup.picasso.Target
 import kotlinx.android.synthetic.main.item_film.view.*
 
 

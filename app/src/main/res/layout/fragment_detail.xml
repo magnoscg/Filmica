@@ -18,7 +18,7 @@
         app:layout_constraintGuide_begin="300dp" />
 
         <ImageView
-            android:id="@+id/imageFilm"
+            android:id="@+id/imgPoster"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@color/colorPrimary"
@@ -33,7 +33,7 @@
             android:id="@+id/overlay"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:background="#651565C0"
+            android:background="#A71565C0"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
