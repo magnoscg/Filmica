@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -15,7 +15,23 @@
     <include
         android:id="@+id/layoutError"
         layout="@layout/layout_error"
-        android:visibility="invisible"/>
+        android:visibility="invisible" />
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <android.support.v7.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorPrimary"
+            app:layout_scrollFlags="scroll|enterAlwaysCollapsed"
+            app:title="Filmica"
+            app:titleTextColor="@android:color/white">
+
+        </android.support.v7.widget.Toolbar>
+
+    </android.support.design.widget.AppBarLayout>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/listFilms"
@@ -23,8 +39,9 @@
         android:layout_height="match_parent"
         android:visibility="invisible"
         app:layoutManager="android.support.v7.widget.GridLayoutManager"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:spanCount="3"
         tools:listitem="@layout/item_film">
 
     </android.support.v7.widget.RecyclerView>
-</FrameLayout>
+</android.support.design.widget.CoordinatorLayout>

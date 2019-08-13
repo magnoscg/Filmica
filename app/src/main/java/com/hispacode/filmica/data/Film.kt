@@ -1,8 +1,10 @@
 package com.hispacode.filmica.data
 
+import android.arch.persistence.room.Entity
 import org.json.JSONArray
 import org.json.JSONObject
 
+@Entity
 data class Film(
 
         val id: String = "",
