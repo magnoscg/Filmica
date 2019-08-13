@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.fragment_watchlist.*
 
 class WatchlistFragment : Fragment() {
 
-    val adapter:WatchlistAdapter = WatchlistAdapter {
+    val adapter: WatchlistAdapter = WatchlistAdapter {
         showDetail(it)
     }
 
@@ -34,8 +34,14 @@ class WatchlistFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         watchlist.adapter = adapter
     }
+
     override fun onResume() {
         super.onResume()
-        FilmsRepo.discoverFilms(context,)
+        FilmsRepo.discoverFilms(context!!,
+            { films ->
+                adapter.setFilms(films)
+            },
+            { error ->
+            })
     }
 }
