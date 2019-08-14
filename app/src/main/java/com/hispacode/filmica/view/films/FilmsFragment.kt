@@ -54,7 +54,7 @@ class FilmsFragment: Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter.setFilms(FilmsRepo.films)
+
         list.adapter = adapter
         buttonRetry.setOnClickListener {
             reload()

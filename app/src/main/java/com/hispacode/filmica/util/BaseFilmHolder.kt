@@ -9,7 +9,7 @@ open class BaseFilmHolder(
     itemView: View,
     clickListener: ((Film) -> Unit?)? = null) : RecyclerView.ViewHolder(itemView) {
 
-    private lateinit var film:Film
+    lateinit var film:Film
 
     init {
         itemView.setOnClickListener {
