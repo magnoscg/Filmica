@@ -1,5 +1,6 @@
 package com.hispacode.filmica.view.detail
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -7,9 +8,7 @@ import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v4.content.ContextCompat
 import android.support.v7.graphics.Palette
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.Toast
 import com.hispacode.filmica.R
 import com.hispacode.filmica.data.Film
@@ -34,8 +33,35 @@ class DetailFragment: Fragment() {
         }
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_detail,container,false)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_detail,menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.action_share) {
+            shareFilm()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun shareFilm() {
+        val intent = Intent(Intent.ACTION_SEND)
+        film?.let {
+            val text = getString(R.string.template_share,it.title,it.rating)
+            intent.type = "text/plain"
+            intent.putExtra(Intent.EXTRA_TEXT,text)
+        }
+        startActivity(Intent.createChooser(intent,getString(R.string.title_shared)))
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
