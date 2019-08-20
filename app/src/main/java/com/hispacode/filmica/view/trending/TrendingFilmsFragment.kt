@@ -1,4 +1,5 @@
-package com.hispacode.filmica.view.films
+package com.hispacode.filmica.view.trending
+
 
 import android.content.Context
 import android.os.Bundle
@@ -8,16 +9,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hispacode.filmica.R
-import com.hispacode.filmica.data.Film
-import com.hispacode.filmica.data.FilmsRepo.discoverFilms
+import com.hispacode.filmica.data.FilmsRepo
 import com.hispacode.filmica.util.GridOffsetDecoration
-import kotlinx.android.synthetic.main.fragments_films.*
+import com.hispacode.filmica.view.films.FilmsAdapter
+import com.hispacode.filmica.view.films.FilmsFragment
+import kotlinx.android.synthetic.main.fragment_trending.*
 import kotlinx.android.synthetic.main.layout_error.*
 import java.lang.IllegalArgumentException
 
-class FilmsFragment: Fragment() {
+class TrendingFilmsFragment : Fragment() {
 
-    private lateinit var listener: OnFilmClickListener
+    private lateinit var listener: FilmsFragment.OnFilmClickListener
 
     private val list: RecyclerView by lazy {
         listFilms.addItemDecoration(GridOffsetDecoration())
@@ -30,25 +32,22 @@ class FilmsFragment: Fragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
 
-        if (context is OnFilmClickListener) {
+        if (context is FilmsFragment.OnFilmClickListener) {
             listener = context
         } else {
-            throw  IllegalArgumentException("The acttached activity isn't implementing " +
-                    OnFilmClickListener::class.java.canonicalName
+            throw  IllegalArgumentException(
+                "The acttached activity isn't implementing " +
+                        FilmsFragment.OnFilmClickListener::class.java.canonicalName
             )
         }
     }
 
-  /* Previous Function without Fragments
-    fun launchFilmDetail(film: Film) {
-
-        val intent = Intent(context, DetailActivity::class.java)
-        intent.putExtra("id", film.id)
-        startActivity(intent)
-    }*/
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.fragments_films,container,false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        return inflater.inflate(R.layout.fragment_trending, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -62,13 +61,14 @@ class FilmsFragment: Fragment() {
 
     override fun onResume() {
         super.onResume()
+
         reload()
     }
 
     private fun reload() {
         showProgress()
 
-        discoverFilms(context!!,
+        FilmsRepo.trendingFilms(context!!,
             { films ->
                 adapter.setFilms(films)
                 showList()
@@ -94,10 +94,5 @@ class FilmsFragment: Fragment() {
         filmsProgress.visibility = View.VISIBLE
         layoutError.visibility = View.INVISIBLE
         list.visibility = View.INVISIBLE
-    }
-
-    //Listener Interface
-    interface OnFilmClickListener {
-        fun onClick(film: Film)
     }
 }

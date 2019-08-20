@@ -8,4 +8,14 @@
         android:id="@+id/action_watchlist"
         android:icon="@drawable/ic_watchlist"
         android:title="@string/title_watchlist"/>
+
+    <item
+        android:id="@+id/action_trending"
+        android:icon="@drawable/ic_action_trending"
+        android:title="@string/title_trending"
+        />
+    <item
+        android:id="@+id/action_search"
+        android:icon="@drawable/ic_action_trending"
+        android:title="@string/tittle_search" />
 </menu>

@@ -19,7 +19,7 @@ import java.text.FieldPosition
 
 class WatchlistFragment : Fragment() {
 
-    val adapter:WatchlistAdapter = WatchlistAdapter {
+    val adapter: WatchlistAdapter = WatchlistAdapter {
         showDetail(it)
     }
 

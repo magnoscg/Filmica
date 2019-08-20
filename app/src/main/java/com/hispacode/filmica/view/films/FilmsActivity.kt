@@ -10,16 +10,19 @@ import com.hispacode.filmica.data.Film
 import com.hispacode.filmica.view.watchlist.WatchlistFragment
 import com.hispacode.filmica.view.detail.DetailActivity
 import com.hispacode.filmica.view.detail.DetailFragment
+import com.hispacode.filmica.view.trending.TrendingFilmsFragment
 import kotlinx.android.synthetic.main.activity_films.*
 
 const val TAG_FILM = "films"
 const val TAG_WATCHLIST = "watchlist"
+const val TAG_TRENDING = "trending"
 
 class FilmsActivity : AppCompatActivity(),
     FilmsFragment.OnFilmClickListener {
 
     private lateinit var filmsFragment: FilmsFragment
     private lateinit var watchlistFragment: WatchlistFragment
+    private lateinit var trendingFilmsFragment: TrendingFilmsFragment
     private lateinit var activeFragment: Fragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -36,6 +39,7 @@ class FilmsActivity : AppCompatActivity(),
             when (it.itemId) {
                 R.id.action_discover -> showMainFragment(filmsFragment)
                 R.id.action_watchlist -> showMainFragment(watchlistFragment)
+                R.id.action_trending -> showMainFragment(trendingFilmsFragment)
             }
             true
         }
@@ -49,20 +53,27 @@ class FilmsActivity : AppCompatActivity(),
     private fun restoreFragments(tag: String) {
         filmsFragment = supportFragmentManager.findFragmentByTag(TAG_FILM) as FilmsFragment
         watchlistFragment = supportFragmentManager.findFragmentByTag(TAG_WATCHLIST) as WatchlistFragment
+        trendingFilmsFragment = supportFragmentManager.findFragmentByTag(TAG_TRENDING) as TrendingFilmsFragment
         activeFragment =
-            if (tag == TAG_WATCHLIST)  watchlistFragment
-            else filmsFragment
+            when (tag) {
+                TAG_WATCHLIST -> watchlistFragment
+                TAG_FILM -> filmsFragment
+                else -> trendingFilmsFragment
+            }
     }
 
     private fun setupFragments() {
         filmsFragment = FilmsFragment()
         watchlistFragment = WatchlistFragment()
+        trendingFilmsFragment = TrendingFilmsFragment()
         activeFragment = filmsFragment
 
         supportFragmentManager.beginTransaction()
             .add(R.id.container, filmsFragment, TAG_FILM)
             .add(R.id.container, watchlistFragment, TAG_WATCHLIST)
+            .add(R.id.container, trendingFilmsFragment, TAG_TRENDING)
             .hide(watchlistFragment)
+            .hide(trendingFilmsFragment)
             .commit()
     }
 
