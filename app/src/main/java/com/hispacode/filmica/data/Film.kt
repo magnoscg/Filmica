@@ -61,7 +61,9 @@ data class Film(
                                 val genre = ApiConstants.genres[genreId] ?: ""
                                 genres.add(genre)
                         }
-                        return genres.reduce { acc, genre ->  "$acc | $genre"}
+                        if (genres.isEmpty()) {
+                            return ""
+                        } else return genres.reduce { acc, genre ->  "$acc | $genre"}
                 }
         }
 

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <EditText
+        android:id="@+id/searchText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:drawableEnd="@drawable/ic_action_search"
+        android:drawableRight="@drawable/ic_action_search"
+        android:drawablePadding="8dp"
+        android:ems="16"
+        android:imeOptions="actionSearch"
+        android:hint="@string/textHint_search"
+        android:inputType="text"
+        android:padding="16dp"
+        android:singleLine="true"
+        android:textStyle="italic" />
+
+
+    <FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/filmsProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            android:visibility="invisible"
+            />
+
+        <include
+            android:id="@+id/layoutNoResults"
+            layout="@layout/layout_no_results"
+            android:visibility="invisible" />
+        <include
+            android:id="@id/layoutError"
+            layout="@layout/layout_error"
+            android:visibility="invisible"/>
+
+        <android.support.v7.widget.RecyclerView
+
+            android:id="@+id/listFilms"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            app:layoutManager="android.support.v7.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:listitem="@layout/item_film">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </FrameLayout>
+</LinearLayout>

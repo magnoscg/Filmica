@@ -124,6 +124,33 @@ object FilmsRepo {
             .add(request)
     }
 
+    fun searchFilms(
+        query: String,
+        context: Context,
+        onResponse: (List<Film>) -> Unit,
+        onError: (VolleyError) -> Unit
+    ) {
+
+        val url = ApiRoutes.searchMoviesUrl(query)
+
+        val request = JsonObjectRequest(Request.Method.GET, url, null,
+            { response ->
+                val films = Film.parseFilms(response.getJSONArray("results"))
+                FilmsRepo.films.clear()
+                FilmsRepo.films.addAll(films)
+
+                onResponse.invoke(films)
+            },
+            { error ->
+
+                error.printStackTrace()
+                onError.invoke(error)
+            })
+
+        Volley.newRequestQueue(context)
+            .add(request)
+    }
+
     private fun dummyFilms(): MutableList<Film> {
 
         return (1..10).map { i: Int ->

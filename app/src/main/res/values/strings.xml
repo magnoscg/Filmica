@@ -16,4 +16,6 @@
     <string name="title_shared">Share Film</string>
     <string name="title_trending">Trending</string>
     <string name="tittle_search">Search</string>
+    <string name="textHint_search">Search for Movies …</string>
+    <string name="noResults">Sorry,\n No movies found. Try something else</string>
 </resources>

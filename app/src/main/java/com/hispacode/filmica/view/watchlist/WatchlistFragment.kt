@@ -1,6 +1,7 @@
 package com.hispacode.filmica.view.watchlist
 
 
+import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
@@ -13,18 +14,29 @@ import com.hispacode.filmica.data.Film
 import com.hispacode.filmica.data.FilmsRepo
 import com.hispacode.filmica.util.BaseFilmHolder
 import com.hispacode.filmica.util.SwipeToDeleteCallback
+import com.hispacode.filmica.view.films.FilmsFragment
 import kotlinx.android.synthetic.main.fragment_watchlist.*
+import java.lang.IllegalArgumentException
 import java.text.FieldPosition
 
 
 class WatchlistFragment : Fragment() {
 
+    lateinit var listener: FilmsFragment.OnFilmClickListener
+
     val adapter: WatchlistAdapter = WatchlistAdapter {
-        showDetail(it)
+        listener.onClick(it)
     }
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    private fun showDetail(film: Film) {
-
+        if (context is FilmsFragment.OnFilmClickListener) {
+            listener = context
+        } else {
+            throw  IllegalArgumentException("The acttached activity isn't implementing " +
+                    FilmsFragment.OnFilmClickListener::class.java.canonicalName
+            )
+        }
     }
 
     override fun onCreateView(
