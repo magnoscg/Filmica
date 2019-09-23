@@ -18,4 +18,7 @@
     <string name="tittle_search">Search</string>
     <string name="textHint_search">Search for Movies …</string>
     <string name="noResults">Sorry,\n No movies found. Try something else</string>
+    <string name="add_to_watchlist">Added to Watchlist</string>
+    <string name="remove_from_watchlist">Film removed</string>
+
 </resources>
