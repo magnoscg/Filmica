@@ -101,13 +101,14 @@ class FilmsActivity : AppCompatActivity(),
 
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("id", film.id)
+            intent.putExtra("filmType",activeFragment.tag.toString())
             startActivity(intent)
 
         } else {
             supportFragmentManager.beginTransaction()
                 .replace(
                     R.id.container_detail,
-                    DetailFragment.newInstance(film.id)
+                    DetailFragment.newInstance(film.id, activeFragment.tag.toString())
                 )
                 .commit()
         }

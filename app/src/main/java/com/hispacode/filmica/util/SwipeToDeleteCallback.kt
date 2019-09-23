@@ -42,7 +42,7 @@ abstract class SwipeToDeleteCallback: ItemTouchHelper.SimpleCallback(0,ItemTouch
         itemView: View,
         c: Canvas
     ) {
-        val checkIcon = ContextCompat.getDrawable(recyclerView.context, R.drawable.ic_check)!!
+        val checkIcon = ContextCompat.getDrawable(recyclerView.context, R.drawable.ic_trash)!!
 
         val iconMargin = (itemView.height - checkIcon.intrinsicHeight) / 3
         val iconTop = itemView.top + (itemView.height - checkIcon.intrinsicHeight) / 2
@@ -66,7 +66,7 @@ abstract class SwipeToDeleteCallback: ItemTouchHelper.SimpleCallback(0,ItemTouch
         dX: Float,
         c: Canvas
     ) {
-        val color = ContextCompat.getColor(recyclerView.context, R.color.colorPrimaryDark)
+        val color = ContextCompat.getColor(recyclerView.context, R.color.deleteColor)
         val background = ColorDrawable(color)
         background.setBounds(
             itemView.left,

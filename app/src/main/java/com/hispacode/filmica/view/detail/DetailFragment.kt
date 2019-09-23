@@ -16,17 +16,18 @@ import com.hispacode.filmica.data.FilmsRepo
 import com.hispacode.filmica.util.SimpleTarget
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.fragment_detail.*
-import kotlinx.android.synthetic.main.item_film.view.*
+
 
 class DetailFragment: Fragment() {
 
     var film: Film? = null
 
     companion object {
-        fun newInstance(filmId: String): DetailFragment {
+        fun newInstance(filmId: String, filmType: String): DetailFragment {
             val fragment = DetailFragment()
             val bundle = Bundle()
             bundle.putString("id",filmId)
+            bundle.putString("filmType", filmType)
             fragment.arguments = bundle
 
             return fragment
@@ -68,7 +69,8 @@ class DetailFragment: Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val id = arguments?.getString("id","")
-        film = FilmsRepo.findFilmById(id!!)
+        val filmType = arguments?.getString("filmType", "") ?: ""
+        film = FilmsRepo.findFilmById(id!!, filmType)
 
         film?.let {
             labelTitle.text = it.title

@@ -2,11 +2,13 @@ package com.hispacode.filmica.data
 
 import android.arch.persistence.room.Room
 import android.content.Context
-import android.provider.Settings
 import com.android.volley.Request
 import com.android.volley.VolleyError
 import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
+import com.hispacode.filmica.view.films.TAG_FILM
+import com.hispacode.filmica.view.films.TAG_SEARCH
+import com.hispacode.filmica.view.films.TAG_TRENDING
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.async
@@ -14,7 +16,12 @@ import kotlinx.coroutines.launch
 
 object FilmsRepo {
 
-    private val films: MutableList<Film> = mutableListOf()
+    //Fix film List, add 1 list for each Fragment
+    //private val films: MutableList<Film> = mutableListOf()
+    private val discoverFilmsList: MutableList<Film> = mutableListOf()
+    private val trendingFilmsList: MutableList<Film> = mutableListOf()
+    private val watchlistFilmsList: MutableList<Film> = mutableListOf()
+    private val searchFilmsList: MutableList<Film> = mutableListOf()
 
     @Volatile
     private var db: FilmDatabase? = null
@@ -54,7 +61,9 @@ object FilmsRepo {
                 db.filmDao().getFilms()
             }
             val films: List<Film> = async.await()
-            callback.invoke(films)
+            watchlistFilmsList.clear()
+            watchlistFilmsList.addAll(films)
+            callback.invoke(watchlistFilmsList)
         }
     }
     fun deleteFilm(context: Context,film: Film, callback: (Film) -> Unit) {
@@ -68,9 +77,14 @@ object FilmsRepo {
         }
     }
 
-    fun findFilmById(id: String): Film? {
-        return films.find {
-            return@find it.id == id
+    fun findFilmById(id: String, type: String): Film? {
+
+        when(type) {
+
+            TAG_FILM -> return discoverFilmsList.find { return@find it.id == id }
+            TAG_TRENDING -> return trendingFilmsList.find { return@find it.id == id }
+            TAG_SEARCH -> return searchFilmsList.find { return@find it.id == id }
+            else -> return watchlistFilmsList.find { return@find it.id == id }
         }
     }
 
@@ -85,8 +99,8 @@ object FilmsRepo {
             { response ->
                 val films =
                     Film.parseFilms(response.getJSONArray("results"))
-                FilmsRepo.films.clear()
-                FilmsRepo.films.addAll(films)
+                    discoverFilmsList.clear()
+                    discoverFilmsList.addAll(films)
 
                 onResponse.invoke(films)
             },
@@ -110,8 +124,8 @@ object FilmsRepo {
             { response ->
                 val films =
                     Film.parseFilms(response.getJSONArray("results"))
-                FilmsRepo.films.clear()
-                FilmsRepo.films.addAll(films)
+                    trendingFilmsList.clear()
+                    trendingFilmsList.addAll(films)
 
                 onResponse.invoke(films)
             },
@@ -136,8 +150,8 @@ object FilmsRepo {
         val request = JsonObjectRequest(Request.Method.GET, url, null,
             { response ->
                 val films = Film.parseFilms(response.getJSONArray("results"))
-                FilmsRepo.films.clear()
-                FilmsRepo.films.addAll(films)
+                searchFilmsList.clear()
+                searchFilmsList.addAll(films)
 
                 onResponse.invoke(films)
             },
