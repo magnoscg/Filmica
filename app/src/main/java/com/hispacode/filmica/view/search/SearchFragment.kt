@@ -75,23 +75,28 @@ class SearchFragment : Fragment() {
 
     private fun reload(query: String) {
 
-        if(query != "") {
+        if (query != "") {
+            if(query.length >= 3) {
 
-            showProgress()
+                showProgress()
 
-            FilmsRepo.searchFilms(query, context!!,
-                { films ->
-                    adapter.setFilms(films)
-                    if (films.isNotEmpty()) {
-                        showList()
-                    } else {
-                        showNoResults()
-                    }
-                },
-                { error ->
-                    showError()
-                })
-        } else {
+                FilmsRepo.searchFilms(query, context!!,
+                    { films ->
+                        adapter.setFilms(films)
+                        if (films.isNotEmpty()) {
+                            showList()
+                        } else {
+                            showNoResults()
+                        }
+                    },
+                    { error ->
+                        showError()
+                    })
+            } else {
+                showErrorMinChars()
+            }
+        }
+         else {
             showDefaultView()
         }
 
@@ -101,24 +106,42 @@ class SearchFragment : Fragment() {
         filmsProgress.visibility = View.INVISIBLE
         layoutNoResults.visibility = View.INVISIBLE
         list.visibility = View.VISIBLE
+        layoutErrorMinChars.visibility = View.INVISIBLE
+        layoutError.visibility = View.INVISIBLE
     }
 
     private fun showDefaultView() {
         filmsProgress.visibility = View.INVISIBLE
         layoutNoResults.visibility = View.INVISIBLE
         list.visibility = View.INVISIBLE
+        layoutErrorMinChars.visibility = View.INVISIBLE
+        layoutError.visibility = View.INVISIBLE
     }
 
     private fun showNoResults() {
         filmsProgress.visibility = View.INVISIBLE
         layoutNoResults.visibility = View.VISIBLE
         list.visibility = View.INVISIBLE
+        layoutErrorMinChars.visibility = View.INVISIBLE
+        layoutError.visibility = View.INVISIBLE
+
     }
 
     private fun showError() {
         filmsProgress.visibility = View.INVISIBLE
         list.visibility = View.INVISIBLE
+        layoutNoResults.visibility = View.INVISIBLE
         layoutError.visibility = View.VISIBLE
+        layoutErrorMinChars.visibility = View.INVISIBLE
+    }
+
+    private fun showErrorMinChars() {
+        filmsProgress.visibility = View.INVISIBLE
+        list.visibility = View.INVISIBLE
+        layoutErrorMinChars.visibility = View.VISIBLE
+        layoutError.visibility = View.INVISIBLE
+        layoutNoResults.visibility = View.INVISIBLE
+
     }
 
     private fun showProgress() {

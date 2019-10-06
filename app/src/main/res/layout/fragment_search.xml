@@ -38,9 +38,15 @@
             android:id="@+id/layoutNoResults"
             layout="@layout/layout_no_results"
             android:visibility="invisible" />
+
         <include
-            android:id="@id/layoutError"
-            layout="@layout/layout_error"
+        android:id="@id/layoutError"
+        layout="@layout/layout_error"
+        android:visibility="invisible"/>
+
+        <include
+            android:id="@+id/layoutErrorMinChars"
+            layout="@layout/layout_error_min_chars"
             android:visibility="invisible"/>
 
         <android.support.v7.widget.RecyclerView

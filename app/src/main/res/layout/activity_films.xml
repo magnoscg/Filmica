@@ -17,10 +17,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
+        app:elevation="6dp"
         app:itemIconTint="@android:color/white"
         app:itemTextAppearanceActive="@style/Navigation.Text"
         app:itemTextColor="@android:color/white"
-        app:menu="@menu/menu_navigation">
-    </android.support.design.widget.BottomNavigationView>
+        app:menu="@menu/menu_navigation"></android.support.design.widget.BottomNavigationView>
 
 </LinearLayout>

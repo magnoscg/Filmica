@@ -5,21 +5,26 @@ import com.hispacode.filmica.BuildConfig
 
 object ApiRoutes {
 
-    fun discoverMoviesUrl(language: String = "en-US", sort: String = "popularity.desc"): String {
+    fun discoverMoviesUrl(language: String = "en-US", sort: String = "popularity.desc", page: Int = 1): String {
         return getUriBuilder()
             .appendPath("discover")
             .appendPath("movie")
             .appendQueryParameter("language", language)
-            .appendQueryParameter("sorty_by", sort)
+            .appendQueryParameter("sort_by", sort)
+            .appendQueryParameter("page", page.toString())
             .appendQueryParameter("include_adult", "false")
             .build().toString()
     }
 
-    fun trendingMoviesUrl(mediaType: String = "movie", timeWindow: String = "week") : String {
+    fun trendingMoviesUrl(mediaType: String = "movie", timeWindow: String = "week", language: String = "en-US", sort: String = "popularity.desc", page: Int = 1) : String {
         return getUriBuilder()
             .appendPath("trending")
             .appendPath(mediaType)
             .appendPath(timeWindow)
+            .appendQueryParameter("language", language)
+            .appendQueryParameter("sort_by", sort)
+            .appendQueryParameter("page", page.toString())
+            .appendQueryParameter("include_adult", "false")
             .build().toString()
     }
 

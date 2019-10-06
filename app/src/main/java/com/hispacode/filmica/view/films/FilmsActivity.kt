@@ -10,6 +10,7 @@ import com.hispacode.filmica.data.Film
 import com.hispacode.filmica.view.watchlist.WatchlistFragment
 import com.hispacode.filmica.view.detail.DetailActivity
 import com.hispacode.filmica.view.detail.DetailFragment
+import com.hispacode.filmica.view.detail.PlaceHolderFragment
 import com.hispacode.filmica.view.search.SearchFragment
 import com.hispacode.filmica.view.trending.TrendingFilmsFragment
 import kotlinx.android.synthetic.main.activity_films.*
@@ -28,23 +29,36 @@ class FilmsActivity : AppCompatActivity(),
     private lateinit var searchFilmsFragment: SearchFragment
     private lateinit var activeFragment: Fragment
 
+    private var detailViewIsSelected: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_films)
 
         if (savedInstanceState == null) {
+            //setupFragments()
+            if (isDetailViewAvailable()) {
+                showPlaceholder()
+            }
             setupFragments()
         } else {
+            if (isDetailViewAvailable() and detailViewIsSelected){
+                showPlaceholder()
+            }
             val tag =savedInstanceState.getString("active", TAG_FILM)
             restoreFragments(tag)
         }
+
         navigation.setOnNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.action_discover -> showMainFragment(filmsFragment)
-                R.id.action_watchlist -> showMainFragment(watchlistFragment)
-                R.id.action_trending -> showMainFragment(trendingFilmsFragment)
-                R.id.action_search -> showMainFragment(searchFilmsFragment)
+                R.id.action_discover -> showMainFragment(filmsFragment, false)
+                R.id.action_watchlist -> showMainFragment(watchlistFragment, true)
+                R.id.action_trending -> showMainFragment(trendingFilmsFragment, false)
+                R.id.action_search -> showMainFragment(searchFilmsFragment, false)
             }
+            /*if (isDetailViewAvailable()) {
+                showPlaceholder()
+            }*/
             true
         }
     }
@@ -62,10 +76,18 @@ class FilmsActivity : AppCompatActivity(),
         activeFragment =
             when (tag) {
                 TAG_WATCHLIST -> watchlistFragment
-                TAG_FILM -> filmsFragment
+                TAG_TRENDING -> trendingFilmsFragment
                 TAG_SEARCH -> searchFilmsFragment
-                else -> trendingFilmsFragment
+                else -> filmsFragment
             }
+    }
+    private fun showPlaceholder() {
+        val placeholderFragment = PlaceHolderFragment()
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.container_detail, placeholderFragment)
+            .commit()
+
+        detailViewIsSelected = false
     }
 
     private fun setupFragments() {
@@ -87,22 +109,37 @@ class FilmsActivity : AppCompatActivity(),
             .commit()
     }
 
-    private fun showMainFragment(fragment: Fragment) {
-        supportFragmentManager.beginTransaction()
-            .hide(activeFragment)
-            .show(fragment)
-            .commit()
+    private fun showMainFragment(fragment: Fragment, isWatchlistFragment: Boolean) {
+
+        if (isDetailViewAvailable()) {
+            showPlaceholder()
+        }
+
+        if (isWatchlistFragment) {
+            supportFragmentManager.beginTransaction()
+                .hide(activeFragment)
+                .detach(fragment)
+                .attach(fragment)
+                .show(fragment)
+                .commit()
+        } else {
+            supportFragmentManager.beginTransaction()
+                .hide(activeFragment)
+                .show(fragment)
+                .commit()
+        }
 
         activeFragment = fragment
     }
     //Is Tablet??
     override fun onClick(film: Film) {
-        if (!isDetailViewAvailable()) {
 
+        if (!isDetailViewAvailable()) {
             val intent = Intent(this, DetailActivity::class.java)
             intent.putExtra("id", film.id)
             intent.putExtra("filmType",activeFragment.tag.toString())
             startActivity(intent)
+            detailViewIsSelected = false
 
         } else {
             supportFragmentManager.beginTransaction()
@@ -111,6 +148,8 @@ class FilmsActivity : AppCompatActivity(),
                     DetailFragment.newInstance(film.id, activeFragment.tag.toString())
                 )
                 .commit()
+
+            detailViewIsSelected = true
         }
     }
 

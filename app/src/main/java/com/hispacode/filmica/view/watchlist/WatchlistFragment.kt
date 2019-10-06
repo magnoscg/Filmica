@@ -2,7 +2,9 @@ package com.hispacode.filmica.view.watchlist
 
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
+import android.support.design.widget.Snackbar
 import android.support.v4.app.Fragment
 import android.support.v7.widget.RecyclerView
 import android.support.v7.widget.helper.ItemTouchHelper
@@ -10,6 +12,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hispacode.filmica.R
+import com.hispacode.filmica.R.string.*
 import com.hispacode.filmica.data.Film
 import com.hispacode.filmica.data.FilmsRepo
 import com.hispacode.filmica.util.BaseFilmHolder
@@ -17,7 +20,7 @@ import com.hispacode.filmica.util.SwipeToDeleteCallback
 import com.hispacode.filmica.view.films.FilmsFragment
 import kotlinx.android.synthetic.main.fragment_watchlist.*
 import java.lang.IllegalArgumentException
-import java.text.FieldPosition
+
 
 
 class WatchlistFragment : Fragment() {
@@ -69,6 +72,15 @@ class WatchlistFragment : Fragment() {
     private fun deleteFilm(film: Film, position: Int) {
         FilmsRepo.deleteFilm(context!!,film) {
             adapter.deleteFilm(position)
+
+            Snackbar.make(watchlist, remove_from_watchlist, Snackbar.LENGTH_LONG)
+                .setAction("UNDO"){
+                    FilmsRepo.saveFilm(context!!, film) {
+                        adapter.insertFilm(position, film)
+                    }
+                }
+                .setActionTextColor(Color.GREEN)
+                .show()
         }
     }
 

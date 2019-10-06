@@ -4,12 +4,15 @@ package com.hispacode.filmica.view.trending
 import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
+import android.support.v7.widget.LinearLayoutManager
 import android.support.v7.widget.RecyclerView
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.hispacode.filmica.R
 import com.hispacode.filmica.data.FilmsRepo
+import com.hispacode.filmica.util.EndlessRecyclerViewScrollListener
 import com.hispacode.filmica.util.GridOffsetDecoration
 import com.hispacode.filmica.view.films.FilmsAdapter
 import com.hispacode.filmica.view.films.FilmsFragment
@@ -57,6 +60,8 @@ class TrendingFilmsFragment : Fragment() {
         buttonRetry.setOnClickListener {
             reload()
         }
+        scrollListener()
+
     }
 
     override fun onResume() {
@@ -65,10 +70,10 @@ class TrendingFilmsFragment : Fragment() {
         reload()
     }
 
-    private fun reload() {
+    private fun reload(page: Int = 1) {
         showProgress()
 
-        FilmsRepo.trendingFilms(context!!,
+        FilmsRepo.trendingFilms(context!!, page,
             { films ->
                 adapter.setFilms(films)
                 showList()
@@ -94,5 +99,14 @@ class TrendingFilmsFragment : Fragment() {
         filmsProgress.visibility = View.VISIBLE
         layoutError.visibility = View.INVISIBLE
         list.visibility = View.INVISIBLE
+    }
+    fun scrollListener() {
+        val layoutManager = list.layoutManager as LinearLayoutManager
+        list.addOnScrollListener(object: EndlessRecyclerViewScrollListener(layoutManager) {
+            override fun onLoadMore(page: Int, totalItemsCount: Int, view: RecyclerView?) {
+                val page = page + 1
+                reload(page)
+            }
+        })
     }
 }

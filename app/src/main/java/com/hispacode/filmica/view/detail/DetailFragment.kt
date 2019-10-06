@@ -86,11 +86,10 @@ class DetailFragment: Fragment() {
 
         buttonAdd.setOnClickListener {
             film?.let {
-                val selectedFilm = it
+                var selectedFilm = it
                 Log.d("info",selectedFilm.toString())
-                FilmsRepo.saveFilm(context!!,it) {
-
-                    Snackbar.make(this.view!!,R.string.add_to_watchlist, Snackbar.LENGTH_LONG)
+                FilmsRepo.saveFilm(context!!,selectedFilm) {
+                    Snackbar.make(this.view!!,R.string.add_to_watchlist, Snackbar.LENGTH_SHORT)
                         .setAction("UNDO") {
                             FilmsRepo.deleteFilm(context!!, selectedFilm) {
                                 Toast.makeText(context,R.string.remove_from_watchlist, Toast.LENGTH_SHORT).show()
